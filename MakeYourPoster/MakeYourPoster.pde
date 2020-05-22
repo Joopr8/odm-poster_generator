@@ -70,29 +70,28 @@ void draw() {
 void place_images() {
   File dir_with_imgs_left = new File(dataPath("WS"));
   File[] files_imgs = dir_with_imgs_left.listFiles(); //guardar as imagens como ficheiros
-  float Ypos_r = 20;
-  float Xpos_r = width - 300;
+  float Ypos_r = 30;
+  float Xpos_r = width - 500;
 
   for (File file_img : files_imgs) { //cada imagem passa a ser um file_img
     if (file_img.toString().endsWith(".png")) { // se o file_img terminar em png
       DraggingPic new_pic = new DraggingPic(Xpos_r, Ypos_r, file_img.toString());
-      Ypos_r += new_pic.sample.height + 100;
+      Ypos_r += new_pic.sample.height;
       if (Ypos_r + new_pic.sample.height >= height) {
         Xpos_r += 150;
-        Ypos_r = 20;
       }
       pics.add(new_pic);
     }
   }
   File dir_with_imgs2 = new File(dataPath("MD"));
   File[] files_imgs2 = dir_with_imgs2.listFiles();
-  float cur_y = 20;
+  float cur_y = 30;
   float cur_x = 10;
   for (File file_img2 : files_imgs2) {
     if (file_img2.toString().endsWith(".png")) {
       //println("Loading image: " + file_img2.toString());
       DraggingPic new_pic2 = new DraggingPic(cur_x, cur_y, file_img2.toString());
-      cur_y += new_pic2.sample.height + 100;
+      cur_y += new_pic2.sample.height + 10;
       if (cur_y + new_pic2.sample.height >= height) {
         cur_x += 100;
         cur_y = 20;

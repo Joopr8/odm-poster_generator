@@ -8,7 +8,7 @@ class DraggingPic {
   DraggingPic(float posx, float posy, String imageNameAsString) {  // constructor
     x=posx;
     y=posy;
-    sample = loadImage(imageNameAsString, "png");
+    sample = loadImage(imageNameAsString);
     sample.resize(100, 0);
     //sample.scale(scale_img);
   }
