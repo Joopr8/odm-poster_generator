@@ -7,7 +7,7 @@ class ColorPicker {
   color[] colors  = {c0, c1, c2, c3, c4};
   int xpos, ypos, c;
   int w = 50;
-  int h = 50;
+  int h = 100;
   PImage cpImage;
 
   ColorPicker(int xpos, int ypos) { //constructor
@@ -17,17 +17,16 @@ class ColorPicker {
 
   void display() {
     for (int i=0; i<5; i++) {
-      strokeWeight(3);
-      stroke(0);
+      noStroke();
       rectMode(CORNER); 
       fill(colors[i]);
-      rect(xpos, ypos+(i*100), w, h);
+      rect(xpos, ypos+(i*h), w, h);
     }
   }
 
-  public void render () {
+  public void mousePressed () {
     for (int i=0; i<6; i++) {
-      if ( mousePressed && mouseX >= xpos && mouseX < xpos + w && mouseY >= ypos*i && mouseY < ypos*i + h ) {
+      if (mousePressed && mouseX >= xpos && mouseX <= xpos + w && mouseY >= ypos && mouseY <= ypos+(5*h) ) {
         c = get( mouseX, mouseY );
         print(c);
       }
