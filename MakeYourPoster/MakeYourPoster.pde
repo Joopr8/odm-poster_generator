@@ -6,7 +6,6 @@ int pw = 400;
 String state = "start";
 PFont Tfont;
 PFont Cfont;
-float scaleImg = 1 ;
 
 void setup() {
   //size(1500, 1000);
@@ -14,34 +13,19 @@ void setup() {
   Tfont = createFont("VoltaSteDEEBol", 32); 
   Cfont = createFont("VoltaT", 20);
   cp = new ColorPicker(width/2+pw/2+50, height/2 - ph/2);
-  place_images();
+      place_images();
+
 }
 
 void draw() {
   if (state == "start") { //Welcome page
-    cp.c = 255; //coloca a cor do cartaz a branco
-    background(238, 119, 49); 
-    textFont(Tfont); 
-    textAlign(CENTER); 
-    fill(255); 
-    text("Make your Dick Bruna poster!", width/2, height/2); 
-    textFont(Cfont); 
-    textAlign(CENTER); 
-    text("Click to start", width/2, height/2+100); 
+    welcome_page();
     if (mousePressed==true) {
       state = "doing";
+      place_images();
     }
   } else if (state == "doing") { //Making the poster 
-    background(36, 53, 66); 
-    rectMode(CENTER); 
-    stroke(255);
-    fill(cp.c);
-    rect(width/2, height/2, pw, ph); //POSTER
-    cp.display();
-    fill(255); 
-    textFont(Cfont);
-    textAlign(CENTER); 
-    text("Press 's' to save", width/2, height-50);
+    doing_page();
     for (DraggingPic p : pics) {
       p.display();
       p.mouseDragged();
@@ -51,21 +35,32 @@ void draw() {
       state = "done";
     }
   } else if (state == "done") { //Poster Finished 
-    background(59, 113, 73); 
-    textFont(Tfont); 
-    textAlign(CENTER); 
-    fill(255); 
-    text("Thanks! Your poster has been saved", width/2, height/2); 
-    textFont(Cfont); 
-    textAlign(CENTER); 
-    text("Press 'r' to restart", width/2, height/2+50); 
+    done_page();
     if (key == 'r') {
       state = "start";
     }
   }
 }
 
+void mousePressed() {
+  for (DraggingPic p : pics) {
+    p.draggingpicMousePressed();
+  }
+}
 
+void mouseReleased() {
+  for (DraggingPic p : pics) {
+    p.draggingpicMouseReleased();
+  }
+}
+
+void keyPressed() {
+  if (key == 's') {
+    PImage drawingArea = get(width/2-pw/2, height/2-ph/2, pw, ph); 
+    drawingArea.save("My Drawings/" + "My Drawing" + drawingNum + ".png"); 
+    drawingNum ++;
+  }
+}
 
 void place_images() {
   File dir_with_imgs_left = new File(dataPath("WS"));
@@ -101,25 +96,38 @@ void place_images() {
   }
 }
 
-void mousePressed() {
-  for (DraggingPic p : pics) {
-    p.draggingpicMousePressed();
-  }
+void welcome_page() { 
+  cp.c = 255; //coloca a cor do cartaz a branco
+  background(238, 119, 49); 
+  textFont(Tfont); 
+  textAlign(CENTER); 
+  fill(255); 
+  text("Make your Dick Bruna poster!", width/2, height/2); 
+  textFont(Cfont); 
+  textAlign(CENTER); 
+  text("Click to start", width/2, height/2+100);
 }
 
-void mouseReleased() {
-  for (DraggingPic p : pics) {
-    p.draggingpicMouseReleased();
-  }
+void doing_page() {
+  background(36, 53, 66);  
+  rectMode(CENTER); 
+  stroke(255);
+  fill(cp.c); //fundo do cartaz
+  rect(width/2, height/2, pw, ph); //POSTER
+  cp.display();
+  fill(255); 
+  textFont(Cfont);
+  textAlign(CENTER); 
+  text("Press 's' to save", width/2, height-50);
 }
 
-void keyPressed() {
-  if (key == 's') {
-    PImage drawingArea = get(width/2-pw/2, height/2-ph/2, pw, ph); 
-    drawingArea.save("My Drawings/" + "My Drawing" + drawingNum + ".png"); 
-    drawingNum ++;
-  }
-}
-
-void reset () {
+void done_page() {
+  background(59, 113, 73); 
+  textFont(Tfont); 
+  textAlign(CENTER); 
+  fill(255); 
+  text("Thanks! Your poster has been saved", width/2, height/2); 
+  textFont(Cfont); 
+  textAlign(CENTER); 
+  text("Press 'r' to restart", width/2, height/2+50);
 }

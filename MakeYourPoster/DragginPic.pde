@@ -12,6 +12,7 @@ class DraggingPic {
     sample.resize(100, 0);
     //sample.scale(scale_img);
   }
+  
 
   void display() {
     image(sample, x, y);
@@ -27,13 +28,14 @@ class DraggingPic {
     hold=false;
   }
 
-  void mouseDragged() 
-  {
+  void mouseDragged() {
     if (hold) {
       x=x+(mouseX-pmouseX); 
       y=y+(mouseY-pmouseY);
     }
+    display();
   }
+  
 
   void mouseWheel(MouseEvent event) { 
     float e = event.getAmount();
