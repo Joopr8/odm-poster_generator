@@ -12,7 +12,7 @@ void setup() {
   fullScreen();
   Tfont = createFont("VoltaSteDEEBol", 32); 
   Cfont = createFont("VoltaT", 20);
-  cp = new ColorPicker(width/2+pw/2+50, height/2 - ph/2);
+  cp = new ColorPicker(width/2-pw/2, height/2 - ph/2 - 80);
       place_images();
 
 }
@@ -66,14 +66,15 @@ void place_images() {
   File dir_with_imgs_left = new File(dataPath("WS"));
   File[] files_imgs = dir_with_imgs_left.listFiles(); //guardar as imagens como ficheiros
   float Ypos_r = 30;
-  float Xpos_r = width - 500;
+  float Xpos_r = width - 110;
 
   for (File file_img : files_imgs) { //cada imagem passa a ser um file_img
     if (file_img.toString().endsWith(".png")) { // se o file_img terminar em png
       DraggingPic new_pic = new DraggingPic(Xpos_r, Ypos_r, file_img.toString());
-      Ypos_r += new_pic.sample.height;
+      Ypos_r += new_pic.sample.height + 10;
       if (Ypos_r + new_pic.sample.height >= height) {
-        Xpos_r += 150;
+        Xpos_r -= 100;
+        Ypos_r = 30;
       }
       pics.add(new_pic);
     }

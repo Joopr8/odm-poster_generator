@@ -6,8 +6,8 @@ class ColorPicker {
   color c4 = #EFE5E3; //beje
   color[] colors  = {c0, c1, c2, c3, c4};
   int xpos, ypos, c;
-  int w = 50;
-  int h = 100;
+  int w = 80;
+  int h = 50;
   PImage cpImage;
 
   ColorPicker(int xpos, int ypos) { //constructor
@@ -20,15 +20,14 @@ class ColorPicker {
       noStroke();
       rectMode(CORNER); 
       fill(colors[i]);
-      rect(xpos, ypos+(i*h), w, h);
+      rect(xpos+(i*w), ypos, w, h);
     }
   }
 
   public void mousePressed () {
-    for (int i=0; i<6; i++) {
-      if (mousePressed && mouseX >= xpos && mouseX <= xpos + w && mouseY >= ypos && mouseY <= ypos+(5*h) ) {
+    for (int i=0; i<5; i++) {
+      if (mousePressed && mouseX >= xpos && mouseX <= xpos+(i*w) + w && mouseY >= ypos && mouseY <= ypos+h) {
         c = get( mouseX, mouseY );
-        print(c);
       }
       fill( c );
     }
