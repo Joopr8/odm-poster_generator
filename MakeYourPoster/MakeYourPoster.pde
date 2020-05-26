@@ -13,8 +13,7 @@ void setup() {
   Tfont = createFont("VoltaSteDEEBol", 32); 
   Cfont = createFont("VoltaT", 20);
   cp = new ColorPicker(width/2-pw/2, height/2 - ph/2 - 80);
-      place_images();
-
+  place_images();
 }
 
 void draw() {
@@ -58,8 +57,8 @@ void keyPressed() {
   if (key == 's') {
     PImage drawingArea = get(width/2-pw/2, height/2-ph/2, pw, ph); 
     drawingArea.save("My Drawings/" + "My Drawing" + drawingNum + ".png"); 
-    drawingNum ++;
   }
+  drawingNum ++;
 }
 
 void place_images() {
