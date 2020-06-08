@@ -10,10 +10,8 @@ class DraggingPic {
     y=posy;
     sample = loadImage(imageNameAsString);
     sample.resize(100, 0);
-    //sample.scale(scale_img);
   }
   
-
   void display() {
     image(sample, x, y);
   }
@@ -33,12 +31,5 @@ class DraggingPic {
       x=x+(mouseX-pmouseX); 
       y=y+(mouseY-pmouseY);
     }
-    display();
-  }
-  
-
-  void mouseWheel(MouseEvent event) { 
-    float e = event.getAmount();
-    scale_img += e *.01 ;
   }
 }

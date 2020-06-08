@@ -6,6 +6,7 @@ int pw = 400;
 String state = "start";
 PFont Tfont;
 PFont Cfont;
+PImage title;
 
 void setup() {
   //size(1500, 1000);
@@ -14,11 +15,13 @@ void setup() {
   Cfont = createFont("VoltaT", 20);
   cp = new ColorPicker(width/2-pw/2, height/2 - ph/2 - 80);
   place_images();
+  title = loadImage("title_beje.png");
 }
 
 void draw() {
   if (state == "start") { //Welcome page
     welcome_page();
+    cp.c = 255;
     if (mousePressed==true) {
       state = "doing";
       place_images();
@@ -35,6 +38,7 @@ void draw() {
     }
   } else if (state == "done") { //Poster Finished 
     done_page();
+    reset();
     if (key == 'r') {
       state = "start";
     }
@@ -50,18 +54,20 @@ void mousePressed() {
 void mouseReleased() {
   for (DraggingPic p : pics) {
     p.draggingpicMouseReleased();
+    p.display();
   }
 }
 
 void keyPressed() {
   if (key == 's') {
     PImage drawingArea = get(width/2-pw/2, height/2-ph/2, pw, ph); 
-    drawingArea.save("My Drawings/" + "My Drawing" + drawingNum + ".png"); 
+    drawingArea.save("My Drawings/" + "My Drawing" + drawingNum + ".png");
   }
   drawingNum ++;
 }
 
 void place_images() {
+  imageMode(CORNER);
   File dir_with_imgs_left = new File(dataPath("WS"));
   File[] files_imgs = dir_with_imgs_left.listFiles(); //guardar as imagens como ficheiros
   float Ypos_r = 30;
@@ -97,15 +103,16 @@ void place_images() {
 }
 
 void welcome_page() { 
-  cp.c = 255; //coloca a cor do cartaz a branco
-  background(238, 119, 49); 
+  background(#223B6F); 
+  imageMode(CENTER);
+  image(title, width/2, height/2, title.width, title.height);
   textFont(Tfont); 
   textAlign(CENTER); 
   fill(255); 
-  text("Make your Dick Bruna poster!", width/2, height/2); 
+  text("Make your Dick Bruna poster!", width/2, height/2 + 200); 
   textFont(Cfont); 
   textAlign(CENTER); 
-  text("Click to start", width/2, height/2+100);
+  text("Click to start", width/2, height/2 + 250);
 }
 
 void doing_page() {
@@ -130,4 +137,11 @@ void done_page() {
   textFont(Cfont); 
   textAlign(CENTER); 
   text("Press 'r' to restart", width/2, height/2+50);
+}
+
+void reset() {
+  cp.c = 255; //coloca a cor do cartaz a branco
+  for (int i=0; i<pics.size(); i++) {
+    pics.remove(i);
+  }
 }
