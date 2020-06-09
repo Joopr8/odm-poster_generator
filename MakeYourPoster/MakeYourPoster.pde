@@ -46,13 +46,13 @@ void mousePressed() {
     p.draggingpicMousePressed();
   }
 
-  if ( state == "doing" && mouseX >= width/2 - pw/2 && mouseX <= width/2 + pw/2 && mouseY >= height - 75 && mouseY <= height - 25) {
+  if ( state == "doing" && mouseX >= width/2 - pw/2 && mouseX <= width/2 + pw/2 && mouseY >= (height - 100) - 25 && mouseY <= (height - 100)+25) {
     state = "done";
     PImage drawingArea = get(width/2-pw/2, height/2-ph/2, pw, ph); 
     drawingArea.save("data/my_drawings/" + "My Drawing" + drawingNum + ".png");
   }
   drawingNum ++;
-  if ( state == "done" && mouseX >= width/2 - pw/2 && mouseX <= width/2 + pw/2 && mouseY >= (height/2 + 100) - 25 && mouseY <= (height/2 + 100) + 25) {
+  if ( state == "done" && mouseX >= width/2 - pw/2 && mouseX <= width/2 + pw/2 && mouseY >= (height - 200) - 25 && mouseY <= (height - 200) + 25) {
     state = "start";
   }
 }
@@ -107,14 +107,14 @@ void welcome_page() {
   textFont(Tfont); 
   textAlign(CENTER); 
   fill(255); 
-  text("Make your Dick Bruna poster!", width/2, height/2 + 200); 
+  text("Make your Dick Bruna poster!", width/2, height/2 + 180); 
   textFont(Cfont);
   rectMode(CENTER);
   fill(#EFE5E3);
-  rect(width/2, height/2 + 250, pw, 50);
-  textAlign(CENTER);
+  rect(width/2, height/2 + 250, pw, 50,10);
+  textAlign(CENTER, CENTER);
   fill(#213A6F);
-  text("Click to start", width/2, height/2 + 260);
+  text("Click to start", width/2, height/2 + 250);
   imageMode(CORNER);
 }
 
@@ -142,18 +142,19 @@ void done_page() {
   background(#333333); 
   textFont(Tfont); 
   textAlign(CENTER); 
-  fill(255); 
+  fill(#EFE5E3); 
   text("Thanks! Your poster has been saved", width/2, height/5); 
-  rect(width/2, height/2 + 100, pw, 50);
-  fill(0); 
+  rect(width/2, height - 200, pw, 50,10);
+  fill(#213A6F); 
   textFont(Cfont);
-  textAlign(CENTER); 
-  text("Let's do it again!", width/2, height-40);
+  textAlign(CENTER, CENTER); 
+  text("Let's do it again!", width/2, height-200);
   for (File poster_img : posters_files) {
     if (poster_img.toString().endsWith(".png")) {
       poster = loadImage(poster_img.toString());
     }
   }
+  imageMode(CENTER);
   image(poster, width/2, height/2, poster.width/1.5, poster.height/1.5);
 }
 
