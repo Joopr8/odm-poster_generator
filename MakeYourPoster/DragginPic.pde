@@ -4,14 +4,15 @@ class DraggingPic {
   PImage sample; 
   boolean hold; // controls whether we are dragging (holding the mouse)
   float scale_img =1;
+  int e;
 
-  DraggingPic(float posx, float posy, String imageNameAsString) {  // constructor
+  DraggingPic(float posx, float posy, String imageNameAsString) { // constructor
     x=posx;
     y=posy;
     sample = loadImage(imageNameAsString);
-    sample.resize(100, 0);
+    sample.resize(110, 0);
   }
-  
+
   void display() {
     image(sample, x, y);
   }
